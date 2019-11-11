@@ -22,8 +22,15 @@ module NonDigestAssets
   end
 
   module CompileWithNonDigest
-    def compile *args
-      paths = super
+    extend ActiveSupport::Concern
+
+    included do
+      alias_method :compile_without_non_digest, :compile
+      alias_method :compile, :compile_with_non_digest
+    end
+
+    def compile_with_non_digest *args
+      paths = compile_without_non_digest(*args)
       NonDigestAssets.assets(assets).each do |(logical_path, digest_path)|
         full_digest_path = File.join dir, digest_path
         full_digest_gz_path = "#{full_digest_path}.gz"
@@ -48,4 +55,4 @@ module NonDigestAssets
   end
 end
 
-Sprockets::Manifest.send(:prepend, NonDigestAssets::CompileWithNonDigest)
+Sprockets::Manifest.send(:include, NonDigestAssets::CompileWithNonDigest)
