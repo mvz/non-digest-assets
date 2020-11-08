@@ -25,7 +25,7 @@ RSpec.describe "NonDigestAssets::CompileWithNonDigest", type: :aruba do
       attr_reader :dir
 
       def initialize
-        @dir = Dir.mktmpdir
+        @dir = Dir.pwd
       end
 
       def compile
@@ -49,7 +49,9 @@ RSpec.describe "NonDigestAssets::CompileWithNonDigest", type: :aruba do
       end
     end
     klass.prepend NonDigestAssets::CompileWithNonDigest
-    klass.new
+    in_current_directory do
+      klass.new
+    end
   end
 
   before do
@@ -59,24 +61,24 @@ RSpec.describe "NonDigestAssets::CompileWithNonDigest", type: :aruba do
   describe "#compile" do
     it "returns the result of the super method" do
       result = sprockets.compile
-      expect(result).to eq ["#{sprockets.dir}/foo-deadbeef.css",
-                            "#{sprockets.dir}/bar-f00df00d.css"]
+      expect(result).to eq [expand_path("foo-deadbeef.css"),
+                            expand_path("bar-f00df00d.css")]
     end
 
     describe "if regular files for each asset exist but gzipped files do not" do
       it "creates only non-digest versions for each asset" do
         sprockets.compile
-        expect("#{sprockets.dir}/foo.css").to be_an_existing_file
-        expect("#{sprockets.dir}/bar.css").to be_an_existing_file
-        expect("#{sprockets.dir}/foo.css.gz").not_to be_an_existing_file
-        expect("#{sprockets.dir}/bar.css.gz").not_to be_an_existing_file
+        expect("foo.css").to be_an_existing_file
+        expect("bar.css").to be_an_existing_file
+        expect("foo.css.gz").not_to be_an_existing_file
+        expect("bar.css.gz").not_to be_an_existing_file
       end
 
       it "does not copy files for non-whitelisted assets" do
         NonDigestAssets.whitelist = ["bar.css"]
         sprockets.compile
-        expect("#{sprockets.dir}/foo.css").not_to be_an_existing_file
-        expect("#{sprockets.dir}/bar.css").to be_an_existing_file
+        expect("foo.css").not_to be_an_existing_file
+        expect("bar.css").to be_an_existing_file
       end
     end
 
@@ -89,10 +91,10 @@ RSpec.describe "NonDigestAssets::CompileWithNonDigest", type: :aruba do
 
       it "does not create any non-digest versions for each asset" do
         sprockets.compile
-        expect("#{sprockets.dir}/foo.css").not_to be_an_existing_file
-        expect("#{sprockets.dir}/bar.css").not_to be_an_existing_file
-        expect("#{sprockets.dir}/foo.css.gz").not_to be_an_existing_file
-        expect("#{sprockets.dir}/bar.css.gz").not_to be_an_existing_file
+        expect("foo.css").not_to be_an_existing_file
+        expect("bar.css").not_to be_an_existing_file
+        expect("foo.css.gz").not_to be_an_existing_file
+        expect("bar.css.gz").not_to be_an_existing_file
       end
     end
 
@@ -106,19 +108,19 @@ RSpec.describe "NonDigestAssets::CompileWithNonDigest", type: :aruba do
 
       it "creates both regular and gzipped non-digest versions for each asset" do
         sprockets.compile
-        expect("#{sprockets.dir}/foo.css").to be_an_existing_file
-        expect("#{sprockets.dir}/bar.css").to be_an_existing_file
-        expect("#{sprockets.dir}/foo.css.gz").to be_an_existing_file
-        expect("#{sprockets.dir}/bar.css.gz").to be_an_existing_file
+        expect("foo.css").to be_an_existing_file
+        expect("bar.css").to be_an_existing_file
+        expect("foo.css.gz").to be_an_existing_file
+        expect("bar.css.gz").to be_an_existing_file
       end
 
       it "does not copy files for non-whitelisted assets" do
         NonDigestAssets.whitelist = ["bar.css"]
         sprockets.compile
-        expect("#{sprockets.dir}/foo.css").not_to be_an_existing_file
-        expect("#{sprockets.dir}/bar.css").to be_an_existing_file
-        expect("#{sprockets.dir}/foo.css.gz").not_to be_an_existing_file
-        expect("#{sprockets.dir}/bar.css.gz").to be_an_existing_file
+        expect("foo.css").not_to be_an_existing_file
+        expect("bar.css").to be_an_existing_file
+        expect("foo.css.gz").not_to be_an_existing_file
+        expect("bar.css.gz").to be_an_existing_file
       end
     end
   end
