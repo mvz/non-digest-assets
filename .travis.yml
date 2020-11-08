@@ -4,11 +4,15 @@ language: ruby
 cache:
   bundler: true
 
-script: bundle exec rake
+script: bundle exec appraisal rake
 
 jobs:
   include:
     - rvm: 2.4.10
+      script: |
+        bundle exec appraisal rails-5_0 rake && \
+        bundle exec appraisal rails-5_1 rake && \
+        bundle exec appraisal rails-5_2 rake
     - rvm: 2.5.8
     - rvm: 2.6.6
     - rvm: 2.7.1
