@@ -1,7 +1,0 @@
-# frozen_string_literal: true
-
-source "https://rubygems.org"
-
-gem "non-digest-assets", path: "../.."
-gem "rails", "~> 5.2.0"
-gem "sprockets", "~> 3.0"

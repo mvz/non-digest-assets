@@ -1,25 +1,25 @@
 # frozen_string_literal: true
 
-require "test_helper"
+require "spec_helper"
 require "non-digest-assets"
 require "tmpdir"
 require "fileutils"
 
-describe "NonDigestAssets" do
+RSpec.describe "NonDigestAssets" do
   describe ".assets" do
     it "returns its arguments if there are no whitelisted assets" do
       NonDigestAssets.whitelist = []
-      _(NonDigestAssets.assets(%w(foo bar))).must_equal %w(foo bar)
+      expect(NonDigestAssets.assets(%w(foo bar))).to eq %w(foo bar)
     end
 
     it "returns only whitelisted parts of arguments if there are whitelisted assets" do
       NonDigestAssets.whitelist = %w(bar baz)
-      _(NonDigestAssets.assets(%w(foo bar))).must_equal ["bar"]
+      expect(NonDigestAssets.assets(%w(foo bar))).to eq ["bar"]
     end
   end
 end
 
-describe "NonDigestAssets::CompileWithNonDigest" do
+RSpec.describe "NonDigestAssets::CompileWithNonDigest", type: :aruba do
   let(:sprockets) do
     klass = Class.new do
       attr_reader :dir
@@ -59,24 +59,24 @@ describe "NonDigestAssets::CompileWithNonDigest" do
   describe "#compile" do
     it "returns the result of the super method" do
       result = sprockets.compile
-      _(result).must_equal ["#{sprockets.dir}/foo-deadbeef.css",
+      expect(result).to eq ["#{sprockets.dir}/foo-deadbeef.css",
                             "#{sprockets.dir}/bar-f00df00d.css"]
     end
 
     describe "if regular files for each asset exist but gzipped files do not" do
       it "creates only non-digest versions for each asset" do
         sprockets.compile
-        _("#{sprockets.dir}/foo.css").path_must_exist
-        _("#{sprockets.dir}/bar.css").path_must_exist
-        _("#{sprockets.dir}/foo.css.gz").path_wont_exist
-        _("#{sprockets.dir}/bar.css.gz").path_wont_exist
+        expect("#{sprockets.dir}/foo.css").to be_an_existing_file
+        expect("#{sprockets.dir}/bar.css").to be_an_existing_file
+        expect("#{sprockets.dir}/foo.css.gz").not_to be_an_existing_file
+        expect("#{sprockets.dir}/bar.css.gz").not_to be_an_existing_file
       end
 
       it "does not copy files for non-whitelisted assets" do
         NonDigestAssets.whitelist = ["bar.css"]
         sprockets.compile
-        _("#{sprockets.dir}/foo.css").path_wont_exist
-        _("#{sprockets.dir}/bar.css").path_must_exist
+        expect("#{sprockets.dir}/foo.css").not_to be_an_existing_file
+        expect("#{sprockets.dir}/bar.css").to be_an_existing_file
       end
     end
 
@@ -89,10 +89,10 @@ describe "NonDigestAssets::CompileWithNonDigest" do
 
       it "does not create any non-digest versions for each asset" do
         sprockets.compile
-        _("#{sprockets.dir}/foo.css").path_wont_exist
-        _("#{sprockets.dir}/bar.css").path_wont_exist
-        _("#{sprockets.dir}/foo.css.gz").path_wont_exist
-        _("#{sprockets.dir}/bar.css.gz").path_wont_exist
+        expect("#{sprockets.dir}/foo.css").not_to be_an_existing_file
+        expect("#{sprockets.dir}/bar.css").not_to be_an_existing_file
+        expect("#{sprockets.dir}/foo.css.gz").not_to be_an_existing_file
+        expect("#{sprockets.dir}/bar.css.gz").not_to be_an_existing_file
       end
     end
 
@@ -106,19 +106,19 @@ describe "NonDigestAssets::CompileWithNonDigest" do
 
       it "creates both regular and gzipped non-digest versions for each asset" do
         sprockets.compile
-        _("#{sprockets.dir}/foo.css").path_must_exist
-        _("#{sprockets.dir}/bar.css").path_must_exist
-        _("#{sprockets.dir}/foo.css.gz").path_must_exist
-        _("#{sprockets.dir}/bar.css.gz").path_must_exist
+        expect("#{sprockets.dir}/foo.css").to be_an_existing_file
+        expect("#{sprockets.dir}/bar.css").to be_an_existing_file
+        expect("#{sprockets.dir}/foo.css.gz").to be_an_existing_file
+        expect("#{sprockets.dir}/bar.css.gz").to be_an_existing_file
       end
 
       it "does not copy files for non-whitelisted assets" do
         NonDigestAssets.whitelist = ["bar.css"]
         sprockets.compile
-        _("#{sprockets.dir}/foo.css").path_wont_exist
-        _("#{sprockets.dir}/bar.css").path_must_exist
-        _("#{sprockets.dir}/foo.css.gz").path_wont_exist
-        _("#{sprockets.dir}/bar.css.gz").path_must_exist
+        expect("#{sprockets.dir}/foo.css").not_to be_an_existing_file
+        expect("#{sprockets.dir}/bar.css").to be_an_existing_file
+        expect("#{sprockets.dir}/foo.css.gz").not_to be_an_existing_file
+        expect("#{sprockets.dir}/bar.css.gz").to be_an_existing_file
       end
     end
   end

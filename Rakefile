@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 require "rake"
-require "rake/testtask"
+require 'rspec/core/rake_task'
 require "bundler/gem_tasks"
 require "rake/clean"
 
@@ -9,21 +9,17 @@ CLEAN.include "fixtures/**/Gemfile.lock"
 CLEAN.include "fixtures/**/public/assets"
 CLOBBER.include "pkg"
 
-desc "Default: run tests."
-task default: :test
+desc "Default: run specs."
+task default: :spec
 
-namespace :test do
-  Rake::TestTask.new(:unit) do |t|
-    t.libs += %w(lib test)
-    t.pattern = "test/unit/**/*_test.rb"
-    t.verbose = true
+namespace :spec do
+  RSpec::Core::RakeTask.new(:unit) do |t|
+    t.pattern = 'spec/unit/**/*_spec.rb'
   end
 
-  Rake::TestTask.new(:integration) do |t|
-    t.libs += %w(lib test)
-    t.pattern = "test/integration/**/*_test.rb"
-    t.verbose = true
+  RSpec::Core::RakeTask.new(:integration) do |t|
+    t.pattern = 'spec/integration/**/*_spec.rb'
   end
 end
 
-task test: ["test:unit", "test:integration"]
+task spec: ["spec:unit", "spec:integration"]
