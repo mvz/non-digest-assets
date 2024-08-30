@@ -2,6 +2,23 @@
 
 Notable changes to this project will be documented in this file.
 
+## [2.4.0](https://github.com/mvz/non-digest-assets/tree/v2.4.0)
+
+This release adds support for Ruby 3.3 and Rails 7.2, and drops support for
+Ruby 2.7.
+
+* Support Ruby 3.0 and up ([#85] by [mvz])
+* Allow Rails 7.2 ([#88] by [texpert])
+* Test with released Rails 7.2 ([#91] by [mvz])
+
+[Full Changelog](https://github.com/mvz/non-digest-assets/compare/v2.3.0...v2.4.0)
+
+[#85]: https://github.com/mvz/non-digest-assets/pull/85
+[#88]: https://github.com/mvz/non-digest-assets/pull/88
+[#91]: https://github.com/mvz/non-digest-assets/pull/91
+
+[texpert]: https://github.com/texpert
+
 ## [2.3.0](https://github.com/mvz/non-digest-assets/tree/v2.3.0)
 
 This release adds support for Ruby 3.2 and Rails 7.1, and drops support for
@@ -16,7 +33,7 @@ Ruby 2.6 and Rails 5.2.
 [#79]: https://github.com/mvz/non-digest-assets/pull/79
 [#80]: https://github.com/mvz/non-digest-assets/pull/80
 [#82]: https://github.com/mvz/non-digest-assets/pull/82
-[#83]: https://github.com/mvz/non-digest-assets/pull/84
+[#84]: https://github.com/mvz/non-digest-assets/pull/84
 
 [mvz]: https://github.com/mvz
 
