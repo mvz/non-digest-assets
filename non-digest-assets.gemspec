@@ -27,7 +27,6 @@ Gem::Specification.new do |spec|
 
   spec.add_development_dependency "appraisal", "~> 2.3"
   spec.add_development_dependency "aruba", "~> 2.0"
-  spec.add_development_dependency "pry", "~> 0.14.0"
   spec.add_development_dependency "rails", [">= 6.0", "< 7.3"]
   spec.add_development_dependency "rake", "~> 13.0"
   spec.add_development_dependency "rspec", "~> 3.10"

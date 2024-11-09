@@ -2,4 +2,3 @@
 
 require "rspec"
 require "aruba/rspec"
-require "pry"
