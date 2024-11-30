@@ -2,6 +2,17 @@
 
 Notable changes to this project will be documented in this file.
 
+## [2.5.0](https://github.com/mvz/non-digest-assets/tree/v2.5.0)
+
+This release adds support for Rails 8.0. Note: propshaft is not supported
+currently, only sprockets.
+
+* Support Rails 8.0 ([#94] by [mvz])
+
+[#94]: https://github.com/mvz/non-digest-assets/pull/94
+
+[Full Changelog](https://github.com/mvz/non-digest-assets/compare/v2.4.0...v2.5.0)
+
 ## [2.4.0](https://github.com/mvz/non-digest-assets/tree/v2.4.0)
 
 This release adds support for Ruby 3.3 and Rails 7.2, and drops support for

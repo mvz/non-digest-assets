@@ -2,7 +2,7 @@
 
 Gem::Specification.new do |spec|
   spec.name = "non-digest-assets"
-  spec.version = "2.4.0"
+  spec.version = "2.5.0"
   spec.platform = Gem::Platform::RUBY
   spec.authors = ["Alex Speller", "Matijs van Zuijlen"]
   spec.email = ["matijs@matijs.net"]
@@ -13,6 +13,8 @@ Gem::Specification.new do |spec|
     Rails provides no option to generate both digest and non-digest
     assets. Installing this gem automatically creates both digest and
     non-digest assets which are useful for many reasons.
+
+    Currently supports sprockets only.
   DESCRIPTION
   spec.files = %w[lib/non-digest-assets.rb LICENSE README.md]
   spec.license = "MIT"
