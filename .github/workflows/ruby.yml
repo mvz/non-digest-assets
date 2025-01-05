@@ -20,7 +20,7 @@ jobs:
 
     strategy:
       matrix:
-        ruby: ["3.0", "3.1", "3.2", "3.3"]
+        ruby: ["3.0", "3.1", "3.2", "3.3", "3.4"]
         appraisal:
           - rails_6_0
           - rails_6_1
