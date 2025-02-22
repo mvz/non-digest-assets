@@ -37,7 +37,7 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "rubocop-packaging", "~> 0.5.2"
   spec.add_development_dependency "rubocop-performance", "~> 1.18"
   spec.add_development_dependency "rubocop-rails", "~> 2.19"
-  spec.add_development_dependency "rubocop-rake", "~> 0.6.0"
+  spec.add_development_dependency "rubocop-rake", "~> 0.7.1"
   spec.add_development_dependency "rubocop-rspec", "~> 3.0"
   spec.add_development_dependency "sprockets-rails", "~> 3.0"
 end
