@@ -25,7 +25,7 @@ RSpec.describe NonDigestAssets::CompileWithNonDigest, type: :aruba do
 
       def compile
         files = assets.map { |(_, path)| "#{dir}/#{path}" }
-        files.each { |it| make_asset it }
+        files.each { |file| make_asset file }
       end
 
       def logger
@@ -80,7 +80,7 @@ RSpec.describe NonDigestAssets::CompileWithNonDigest, type: :aruba do
 
     context "when no files exist for each asset" do
       before do
-        sprockets.define_singleton_method :make_asset do |it|
+        sprockets.define_singleton_method :make_asset do |asset|
           # Do nothing
         end
       end
@@ -98,9 +98,9 @@ RSpec.describe NonDigestAssets::CompileWithNonDigest, type: :aruba do
 
     context "when both regular and gzipped files exist for each asset" do
       before do
-        sprockets.define_singleton_method :make_asset do |it|
-          FileUtils.touch it
-          FileUtils.touch "#{it}.gz"
+        sprockets.define_singleton_method :make_asset do |asset|
+          FileUtils.touch asset
+          FileUtils.touch "#{asset}.gz"
         end
       end
 
