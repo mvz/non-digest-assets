@@ -45,3 +45,9 @@ appraise "rails_8_0" do
   gem "sprockets", "~> 4.0"
   gem "sprockets-rails", "~> 3.0"
 end
+
+appraise "rails_8_1" do
+  gem "rails", "~> 8.1.0"
+  gem "sprockets", "~> 4.0"
+  gem "sprockets-rails", "~> 3.0"
+end
