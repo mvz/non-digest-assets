@@ -2,7 +2,7 @@
 
 Gem::Specification.new do |spec|
   spec.name = "non-digest-assets"
-  spec.version = "2.5.0"
+  spec.version = "2.6.0"
   spec.platform = Gem::Platform::RUBY
   spec.authors = ["Alex Speller", "Matijs van Zuijlen"]
   spec.email = ["matijs@matijs.net"]

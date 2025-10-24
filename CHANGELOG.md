@@ -2,6 +2,16 @@
 
 Notable changes to this project will be documented in this file.
 
+## [2.6.0](https://github.com/mvz/non-digest-assets/tree/v2.6.0)
+
+This release adds support for Ruby 3.4 and Rails 8.1.
+
+* Support Ruby 3.4 ([#96] by [mvz])
+* Support Rails 8.1 ([#105] by [mvz])
+
+[#96]: https://github.com/mvz/non-digest-assets/pull/96
+[#105]: https://github.com/mvz/non-digest-assets/pull/105
+
 ## [2.5.0](https://github.com/mvz/non-digest-assets/tree/v2.5.0)
 
 This release adds support for Rails 8.0. Note: propshaft is not supported
