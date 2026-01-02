@@ -19,6 +19,11 @@ jobs:
     strategy:
       matrix:
         include:
+          # Only combinations where both versions were supported at the same
+          # time are included here. For Rails, support is assumed to end when
+          # active support ends; for Ruby, support is assumed to end at
+          # end-of-life.
+
           - ruby: "3.0"
             appraisal: rails_6_0
           - ruby: "3.0"
@@ -34,8 +39,9 @@ jobs:
             appraisal: rails_7_1
           - ruby: "3.1"
             appraisal: rails_7_2
-          - ruby: "3.1"
-            appraisal: rails_8_0
+          # Rails 8.0 explictly depends on Ruby 3.2 or higher, so the combination
+          # of Rails 8.0 and Ruby 3.1 is excluded even though Rails 8.0 was
+          # released before Ruby 3.1 was EOL.
 
           - ruby: "3.2"
             appraisal: rails_7_0
