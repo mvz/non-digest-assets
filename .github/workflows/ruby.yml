@@ -38,6 +38,11 @@ jobs:
             appraisal: rails_8_1
           - ruby: "3.1"
             appraisal: rails_8_1
+        include:
+          - ruby: "4.0"
+            appraisal: rails_8_0
+          - ruby: "4.0"
+            appraisal: rails_8_1
 
     env:
       BUNDLE_GEMFILE: gemfiles/${{ matrix.appraisal }}.gemfile
