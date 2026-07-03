@@ -39,5 +39,6 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "rubocop-rails", "~> 2.35"
   spec.add_development_dependency "rubocop-rake", "~> 0.7.1"
   spec.add_development_dependency "rubocop-rspec", "~> 3.10"
+  spec.add_development_dependency "rubocop-rspec_rails", "~> 2.32"
   spec.add_development_dependency "sprockets-rails", "~> 3.0"
 end
