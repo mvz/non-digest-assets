@@ -29,7 +29,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency "sprockets", "~> 4.0"
 
   spec.add_development_dependency "appraisal", "~> 2.3"
-  spec.add_development_dependency "aruba", "~> 2.0"
+  spec.add_development_dependency "aruba", [">= 2.4", "< 4.0"]
   spec.add_development_dependency "rails", ">= 6.0", "< 8.2"
   spec.add_development_dependency "rake", "~> 13.0"
   spec.add_development_dependency "rspec", "~> 3.10"
